@@ -1,0 +1,31 @@
+---
+- name: install docker pre-requisites
+  become: yes
+  yum:
+    name: ['yum-utils', 'device-mapper-persistent-data', 'lvm2']
+    state: latest
+
+- name: setup docker repository
+  become: yes
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: install docker
+  become: yes
+  yum:
+    name: docker-ce
+    state: latest
+
+- name: install docker-compose
+  become: yes
+  pip:
+    name: ["docker-compose==1.22", "jsondiff"]
+    state: latest
+
+- name: enable and start docker
+  become: yes
+  systemd:
+    name: docker
+    state: started
+    enabled: yes

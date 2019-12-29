@@ -1,0 +1,14 @@
+---
+- name: build images from docker compose
+  become: yes
+  become_user: docker
+  command: docker-compose build 
+  args:
+    chdir: /home/docker/poc/
+
+- name: push images to local docker registry
+  become: yes
+  become_user: docker
+  command: docker-compose push 
+  args:
+    chdir: /home/docker/poc/

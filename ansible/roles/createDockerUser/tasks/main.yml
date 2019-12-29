@@ -1,0 +1,17 @@
+---
+- name: create docker group
+  become: yes
+  group:
+    name: docker
+    state: present
+
+- name: create docker user
+  become: yes
+  user:
+    name: docker
+    password: "{{ password }}"
+    comment: Docker user for engine and swarm
+    shell: /bin/bash
+    group: docker
+    groups: wheel
+    state: present

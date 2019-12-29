@@ -1,0 +1,9 @@
+---
+- name: deploy stack from compose file
+  become: yes
+  become_user: docker
+  docker_stack:
+    name: poc
+    state: present
+    compose:
+      - /home/docker/poc/docker-compose.yml

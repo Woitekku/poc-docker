@@ -1,0 +1,9 @@
+---
+- name: add workers to the cluster
+  become: yes
+  become_user: docker
+  docker_swarm:
+    state: join
+    remote_addrs: ["{{ hostvars['swarm-manager'].ansible_default_ipv4.address }}"]
+    advertise_addr: "{{ ansible_default_ipv4.address }}"
+    join_token: "{{ hostvars['swarm-manager'].swarmInitReturn.swarm_facts.JoinTokens.Worker }}"

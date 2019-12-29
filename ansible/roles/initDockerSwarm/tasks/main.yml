@@ -1,0 +1,8 @@
+---
+- name: initialize docker swarm
+  become: yes
+  become_user: docker
+  docker_swarm:
+    state: present
+    advertise_addr: "{{ hostvars['swarm-manager'].ansible_default_ipv4.address }}"
+  register : swarmInitReturn

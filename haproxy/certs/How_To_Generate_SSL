@@ -1,0 +1,4 @@
+openssl genrsa -out haproxy/certs/poc.key 2048
+openssl req -new -key haproxy/certs/poc.key -out haproxy/certs/poc.csr
+openssl x509 -req -days 365 -in haproxy/certs/poc.csr -signkey haproxy/certs/poc.key -out haproxy/certs/poc.crt
+cat haproxy/certs/poc.crt haproxy/certs/poc.key | tee haproxy/poc.pem

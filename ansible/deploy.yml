@@ -1,0 +1,44 @@
+---
+- name: setup pre-requisites
+  gather_facts: yes
+  hosts: dockerNodes
+  roles:
+    - setHostname
+    - updateHostsFile
+
+- name: setup docker and docker compose
+  gather_facts: no
+  hosts: dockerNodes
+  roles:
+    - createDockerUser
+    - installDocker
+
+- name: setup docker swarm manager
+  gather_facts: no
+  hosts: swarmManagers
+  roles:
+    - initDockerSwarm
+
+- name: setuip docker swarm workers 
+  gather_facts: no
+  hosts: swarmWorkers
+  roles:
+    - joinDockerSwarm
+
+- name: setup local docker registry
+  gather_facts: no
+  hosts: swarmManagers
+  roles:
+    - createDockerRegistry
+
+- name: setup images
+  gather_facts: no
+  hosts: swarmManagers
+  roles:
+    - buildAndPushImages
+
+- name: setup stack with applications
+  gather_facts: no
+  hosts: swarmManagers
+  roles:
+    - deployStack

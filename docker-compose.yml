@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  web-static:
+    build: ./web-static
+    image: localhost:5000/web-static
+  web-ui:
+    build: ./web-ui
+    image: localhost:5000/web-ui
+  haproxy:
+    build: ./haproxy
+    image: localhost:5000/haproxy
+    ports:
+      - 80:8080
+      - 443:8443
+    command: ["./wait-for-it.sh", "/docker-entrypoint.sh", "haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg"]
