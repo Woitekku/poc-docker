@@ -19,7 +19,7 @@
   roles:
     - initDockerSwarm
 
-- name: setuip docker swarm workers 
+- name: setup docker swarm workers 
   gather_facts: no
   hosts: swarmWorkers
   roles:
@@ -30,6 +30,12 @@
   hosts: swarmManagers
   roles:
     - createDockerRegistry
+
+- name: setup data files
+  gather_facts: no
+  hosts: swarmManagers
+  roles:
+    - getDataFiles 
 
 - name: setup images
   gather_facts: no

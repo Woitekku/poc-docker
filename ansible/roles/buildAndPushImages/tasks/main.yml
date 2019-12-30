@@ -4,11 +4,11 @@
   become_user: docker
   command: docker-compose build 
   args:
-    chdir: /home/docker/poc/
+    chdir: /home/docker/poc-docker
 
 - name: push images to local docker registry
   become: yes
   become_user: docker
   command: docker-compose push 
   args:
-    chdir: /home/docker/poc/
+    chdir: /home/docker/poc-docker

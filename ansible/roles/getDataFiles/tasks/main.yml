@@ -1,0 +1,7 @@
+---
+- name: get docker compose data
+  become: yes
+  become_user: docker
+  git:
+    repo: "https://github.com/wojciechcichy/poc-docker.git"
+    dest: /home/docker/poc-docker

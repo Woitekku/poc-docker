@@ -6,4 +6,4 @@
     name: poc
     state: present
     compose:
-      - /home/docker/poc/docker-compose.yml
+      - /home/docker/poc-docker/docker-compose.yml
